@@ -1,0 +1,24 @@
+{
+  "float": [
+    {
+      "name": "100vp",
+      "value": "100vp"
+    },
+    {
+      "name": "25vp",
+      "value": "25vp"
+    },
+    {
+      "name": "16vp",
+      "value": "16vp"
+    },
+    {
+      "name": "15vp",
+      "value": "15vp"
+    },
+    {
+      "name": "10vp",
+      "value": "10vp"
+    }
+  ]
+}

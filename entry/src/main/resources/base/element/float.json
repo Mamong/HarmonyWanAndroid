@@ -1,0 +1,20 @@
+{
+  "float": [
+    {
+      "name": "bottom_tab_bar_width_lg",
+      "value": "96vp"
+    },
+    {
+      "name": "side_tab_bar_height",
+      "value": "80vp"
+    },
+    {
+      "name": "tab_font_size",
+      "value": "15fp"
+    },
+    {
+      "name": "tab_top_margin",
+      "value": "4vp"
+    }
+  ]
+}

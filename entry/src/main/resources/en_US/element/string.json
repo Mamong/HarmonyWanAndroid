@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "WanAndroid"
+    },
+    {
+      "name": "dependency_reason",
+      "value": "Used to initiate network data requests."
+    },
+    {
+      "name": "http_error_message",
+      "value": "Network request failed, please try later!"
+    },
+    {
+      "name": "tab_index",
+      "value": "Home"
+    },
+    {
+      "name": "tab_hierarchy",
+      "value": "Hierarchy"
+    },
+    {
+      "name": "tab_public_account",
+      "value": "wxArticle"
+    },
+    {
+      "name": "tab_navigation",
+      "value": "Navigation"
+    },
+    {
+      "name": "tab_project",
+      "value": "Project"
+    }
+  ]
+}

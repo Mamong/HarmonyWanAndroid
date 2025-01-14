@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "玩安卓"
+    },
+    {
+      "name": "dependency_reason",
+      "value": "Used to initiate network data requests."
+    },
+    {
+      "name": "http_error_message",
+      "value": "Network request failed, please try later!"
+    },
+    {
+      "name": "tab_index",
+      "value": "首页"
+    },
+    {
+      "name": "tab_hierarchy",
+      "value": "体系"
+    },
+    {
+      "name": "tab_public_account",
+      "value": "公众号"
+    },
+    {
+      "name": "tab_navigation",
+      "value": "导航"
+    },
+    {
+      "name": "tab_project",
+      "value": "项目"
+    }
+  ]
+}
