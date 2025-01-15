@@ -7,7 +7,7 @@ import { ApiException } from "../utils/Request";
 import { toastShort } from "../utils/ToastUtils";
 import { CommonFlatList } from "../view/CommonFlatList";
 import { NavigationBarView } from "@mamong/navigationbarview"
-import { CoinDetailListItem } from "../view/CoinDetailListItem";
+import { CoinDetailListItem, CoinDetailSkeletonItem } from "../view/CoinDetailListItem";
 import { SymbolGlyphModifier } from "@kit.ArkUI";
 import { WebviewParam } from "./WebView";
 
@@ -124,20 +124,16 @@ export struct CoinDetailsPage {
     CoinDetailListItem({ item: value })
   }
 
+  @Builder
+  listItemSkeleton(){
+    CoinDetailSkeletonItem()
+  }
+
   build() {
     NavDestination() {
       Column() {
-        // NavigationBarView({
-        //   title: '玩安卓',
-        //   showBack: false,
-        //   navHeight: 44,
-        //   rightMenus: [
-        //     {
-        //       'value': "", 'symbolIcon': $r('sys.symbol.magnifyingglass'), 'action': () => {
-        //     }
-        //     }]
-        // })
         CommonFlatList({
+          skeletonCount: 10,
           showGoTop: true,
           isLoading: this.isLoading,
           isSuccess: this.isSuccess,
@@ -146,6 +142,9 @@ export struct CoinDetailsPage {
           data: this.data,
           listItem: (value: object) => {
             this.listItem(value as CoinDetail)
+          },
+          listItemSkeleton:()=>{
+            this.listItemSkeleton()
           },
           listHeader: () => {
             this.header()

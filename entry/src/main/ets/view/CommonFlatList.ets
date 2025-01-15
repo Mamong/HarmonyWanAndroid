@@ -7,12 +7,15 @@ import { DefaultEmpty, DefaultError } from "./PlaceholderView"
 @Component
 export struct CommonFlatList {
   @Consume('pageInfos') pageInfos: NavPathStack
-
+  /** 是否显示Loading */
+  @Prop showLoading: boolean = true
   @Prop isLoading: boolean
   @Prop isSuccess: boolean
   @Prop hasMoreData: boolean
   @Prop error: ApiException | null = null
   @Prop showGoTop: boolean = false
+  /** 骨架屏数量 */
+  @Prop skeletonCount: number = 0
   //内部根据滚动位置控制GoTopButton的显式与隐藏
   @State private showTop: boolean = false
   private scroller = new Scroller()
@@ -21,13 +24,17 @@ export struct CommonFlatList {
   @Require @Prop data: object[]
   onRefresh?: () => void
   onEndReached?: () => void
+  /** 列表头builder */
   @BuilderParam listHeader?: () => void;
+  /** 骨架屏builder */
+  @BuilderParam listItemSkeleton?: () => void;
+  /** 列表项builder，必须 */
   @Require @BuilderParam listItem: (value: object) => void = EmptyBuilder;
 
   @Builder
   listFooter() {
     Row() {
-      if(this.hasMoreData) {
+      if (this.hasMoreData) {
         LoadingProgress().width(20).height(20)
       }
       Text(this.hasMoreData ? '加载中...' : '没有更多数据了')
@@ -37,7 +44,7 @@ export struct CommonFlatList {
   }
 
   @Builder
-  listEmpty(){
+  listEmpty() {
     DefaultEmpty()
   }
 
@@ -45,7 +52,20 @@ export struct CommonFlatList {
     Stack({ alignContent: Alignment.Center }) {
       //初次加载
       if (this.isLoading) {
-        ActivityLoading()
+        if (this.skeletonCount > 0 && this.listItemSkeleton) {
+          List() {
+            ForEach(new Array(this.skeletonCount).fill(0), () => {
+              if (this.listItemSkeleton) {
+                ListItem() {
+                  this.listItemSkeleton()
+                }
+              }
+            })
+          }.width('100%').height('100%')
+        }
+        if (this.showLoading) {
+          ActivityLoading()
+        }
       } else {
         //失败且数据为空，所有错误都通过toast展示
         if (this.error && this.data.length == 0) {
