@@ -1,5 +1,6 @@
 import { webview } from "@kit.ArkWeb";
 import { BusinessError } from "@kit.BasicServicesKit";
+import { NavigationTitle } from "../constants/CommonConstants";
 
 @Component
 export struct Webview {
@@ -24,7 +25,7 @@ export struct Webview {
           }
         })
     }
-    .title(this.param.title)
+    .title(NavigationTitle(this.param.title))
     // .onReady(cxt => {
     //   let param = cxt.pathInfo.param as WebviewParam
     //   this.title = param.title
@@ -35,10 +36,10 @@ export struct Webview {
 
 
 export class WebviewParam {
-  title: string
+  title: ResourceStr
   url: string
 
-  constructor(title:string="", url:string="") {
+  constructor(title:ResourceStr="", url:string="") {
     this.title = title
     this.url = url
   }

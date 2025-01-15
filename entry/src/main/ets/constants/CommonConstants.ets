@@ -162,3 +162,13 @@ export class CommonConstants {
 @Builder
 export function EmptyBuilder() {
 }
+
+@Builder
+export function NavigationTitle(title:ResourceStr) {
+  Column() {
+    Text(title).fontSize(20).fontWeight(FontWeight.Bold)
+  }
+  .justifyContent(FlexAlign.Center)
+  .height('100%')
+  //.backgroundColor(Color.Green)
+}

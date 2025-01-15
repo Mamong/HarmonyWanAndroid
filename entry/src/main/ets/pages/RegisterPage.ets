@@ -1,3 +1,4 @@
+import { NavigationTitle } from "../constants/CommonConstants"
 import { ApiException } from "../utils/Request"
 import { toastShort } from "../utils/ToastUtils"
 import { UserInfo } from "../viewmodel/Models"
@@ -14,26 +15,26 @@ export struct RegisterPage {
 
   register() {
     if (this.uname.length == 0) {
-      toastShort(this.getUIContext(), "用户名不能为空")
+      toastShort(this.getUIContext(), $r('app.string.tips_username_empty'))
       return
     }
     if (this.password.length == 0) {
-      toastShort(this.getUIContext(), "密码不能为空")
+      toastShort(this.getUIContext(), $r('app.string.tips_pwd_empty'))
       return
     }
     if (this.repassword.length == 0) {
-      toastShort(this.getUIContext(), "确认密码不能为空")
+      toastShort(this.getUIContext(), $r('app.string.tips_pwd_confirm_empty'))
       return
     }
-    if (this.password != this.repassword) {
-      toastShort(this.getUIContext(), "两次输入的密码不同")
-      return
-    }
+    // if (this.password != this.repassword) {
+    //   toastShort(this.getUIContext(), "两次输入的密码不同")
+    //   return
+    // }
     this.isLoading = true
     userVm.register(this.uname, this.password, this.repassword).then((value:UserInfo)=>{
       PersistentStorage.persistProp<string>("username", value.username)
       AppStorage.setOrCreate("username", value.username)
-      toastShort(this.getUIContext(), "注册成功")
+      toastShort(this.getUIContext(), $r('app.string.login_success'))
       this.pageInfos.pop()
     }).catch((error:ApiException)=>{
       toastShort(this.getUIContext(), error.message)
@@ -49,7 +50,7 @@ export struct RegisterPage {
         Column() {
           Row() {
             SymbolGlyph($r("sys.symbol.person"))
-            TextInput({ placeholder: "用户名" })
+            TextInput({ placeholder: $r('app.string.login_userName') })
               .onChange((value: string) => {
                 console.info(value);
                 this.uname = value
@@ -58,7 +59,7 @@ export struct RegisterPage {
 
           Row() {
             SymbolGlyph($r("sys.symbol.lock"))
-            TextInput({ placeholder: "密码" })
+            TextInput({ placeholder: $r('app.string.login_pwd') })
               .type(InputType.Password)
               .onChange((value: string) => {
                 console.info(value);
@@ -68,7 +69,7 @@ export struct RegisterPage {
 
           Row() {
             SymbolGlyph($r("sys.symbol.lock"))
-            TextInput({ placeholder: "确认密码" })
+            TextInput({ placeholder: $r('app.string.register_confirm_pwd') })
               .type(InputType.Password)
               .onChange((value: string) => {
                 console.info(value);
@@ -81,7 +82,7 @@ export struct RegisterPage {
               if (this.isLoading) {
                 LoadingProgress().width(40).height(40).color(Color.White)
               } else {
-                Text('注册').fontSize(18).fontColor(Color.White)
+                Text($r('app.string.register')).fontSize(18).fontColor(Color.White)
               }
             }
             .height(50)
@@ -97,8 +98,8 @@ export struct RegisterPage {
           .margin({ top: 40, left: 25, right: 25 })
 
           Row() {
-            Text("已有账号？去")
-            Button("登录", { buttonStyle: ButtonStyleMode.TEXTUAL })
+            Text($r('app.string.register_to_login'))
+            Button($r('app.string.login'), { buttonStyle: ButtonStyleMode.TEXTUAL })
               .onClick(()=>{
                 this.pageInfos.replacePathByName('login',null)
               })
@@ -109,6 +110,6 @@ export struct RegisterPage {
       .align(Alignment.TopStart)
       .height('100%')
 
-    }.title('注册')
+    }.title(NavigationTitle($r('app.string.register')))
   }
 }

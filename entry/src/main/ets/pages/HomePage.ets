@@ -108,7 +108,7 @@ export struct HomePage {
     Column() {
       Column() {
         NavigationBarView({
-          title: '玩安卓',
+          title: $r('app.string.tab_home'),
           showBack: false,
           navHeight: 44,
           leftMenus: [

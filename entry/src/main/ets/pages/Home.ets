@@ -27,7 +27,7 @@ export struct Home {
   @State currentIndex: number = 0;
   private homeTabBarOption: TabBarOption = {
     index: 0,
-    title: $r('app.string.tab_index'),
+    title: $r('app.string.tab_home'),
     normalImg: $r('sys.symbol.house'),
     selectedImg: $r('sys.symbol.house_fill'),
   };

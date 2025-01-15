@@ -1,7 +1,7 @@
 import userVm from "../viewmodel/UserViewModel"
 
 import { CoinDetail, CoinInfo, CoinListResponse } from "../viewmodel/Models"
-import { CommonConstants as Const } from '../constants/CommonConstants';
+import { CommonConstants as Const, NavigationTitle } from '../constants/CommonConstants';
 
 import { ApiException } from "../utils/Request";
 import { toastShort } from "../utils/ToastUtils";
@@ -131,10 +131,10 @@ export struct CoinDetailsPage {
     .menus([
       {
         value: '', symbolIcon: new SymbolGlyphModifier($r('sys.symbol.questionmark_circle')), action: () => {
-        this.pageInfos.pushPathByName('webview', new WebviewParam('积分规则', Const.pointRule))
+        this.pageInfos.pushPathByName('webview', new WebviewParam($r('app.string.points_rule'), Const.pointRule))
       }
       }
     ])
-    .title('积分明细')
+    .title(NavigationTitle($r('app.string.menu_points_details')))
   }
 }

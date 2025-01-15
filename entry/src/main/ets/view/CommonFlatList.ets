@@ -38,7 +38,7 @@ export struct CommonFlatList {
       if (this.hasMoreData) {
         LoadingProgress().width(20).height(20)
       }
-      Text(this.hasMoreData ? '加载中...' : '没有更多数据了')
+      Text(this.hasMoreData ? $r('app.string.loading') : $r('app.string.footer_no_more'))
         .padding(12)
     }.justifyContent(FlexAlign.Center)
     .width('100%')
@@ -55,7 +55,7 @@ export struct CommonFlatList {
       if (this.isLoading) {
         if (this.skeletonCount > 0 && this.listItemSkeleton) {
           List() {
-            ForEach(new Array(this.skeletonCount).fill(0), (_:number, index: number) => {
+            ForEach(new Array(this.skeletonCount).fill(0), (_: number, index: number) => {
               if (this.listItemSkeleton) {
                 ListItem() {
                   this.listItemSkeleton(index)
@@ -72,7 +72,7 @@ export struct CommonFlatList {
         if (this.error && this.data.length == 0) {
           DefaultError({
             error: this.error.message,
-            actionTitle: this.error.errorCode == -1001 ? "去登录" : "重试",
+            actionTitle: this.error.errorCode == -1001 ? $r('app.string.tips_not_login') : "重试",
             action: this.error.errorCode == -1001 ? () => {
               this.pageInfos.pushPathByName('login', null)
             } : this.onRefresh

@@ -52,7 +52,7 @@ export struct HierarchyPage {
     //由于TabContent垂直居中，套一层满屏Column解决
     Column() {
       Column() {
-        NavigationBarView({ title: '体系', showBack: false, navHeight: 44 })
+        NavigationBarView({ title: $r('app.string.tab_hierarchy'), showBack: false, navHeight: 44 })
         if (this.isLoading) {
           ActivityLoading()
         } else {

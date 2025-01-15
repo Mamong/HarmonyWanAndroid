@@ -1,3 +1,4 @@
+import { NavigationTitle } from "../constants/CommonConstants"
 import { ArticleList, ArticleSource } from "../view/ArticleList"
 
 @Component
@@ -7,6 +8,6 @@ export struct CollectionArticlesPage {
     NavDestination() {
       ArticleList({ source: ArticleSource.Collection })
     }
-    .title('我的收藏')
+    .title(NavigationTitle($r('app.string.menu_collection')))
   }
 }

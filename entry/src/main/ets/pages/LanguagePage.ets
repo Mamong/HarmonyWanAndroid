@@ -1,6 +1,6 @@
 import { i18n } from '@kit.LocalizationKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { CommonConstants as Const, Language } from '../constants/CommonConstants';
+import { CommonConstants as Const, Language, NavigationTitle } from '../constants/CommonConstants';
 
 @Component
 export struct LanguagePage {
@@ -57,6 +57,6 @@ export struct LanguagePage {
       .divider({ strokeWidth: 1, color: '#ffe9f0f0' })
     }
     .backgroundColor('#F3F4F5')
-    .title('多语言')
+    .title(NavigationTitle($r('app.string.language')))
   }
 }

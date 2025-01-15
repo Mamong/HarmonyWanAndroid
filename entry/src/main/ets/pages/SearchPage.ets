@@ -27,7 +27,7 @@ export struct SearchPage {
 
   @Builder
   search() {
-    Search({ value: this.keyword, placeholder: '搜索更多干货' })
+    Search({ value: this.keyword, placeholder: $r('app.string.search_placeholder') })
       .searchButton('搜索')
       .height(40)
       .backgroundColor('#F5F5F5')
@@ -35,6 +35,10 @@ export struct SearchPage {
       .placeholderFont({ size: 14, weight: 400 })
       .textFont({ size: 14, weight: 400 })
       .onSubmit((_: string) => {
+        if(this.keyword.length == 0){
+          toastShort(this.getUIContext(), $r('app.string.tips_search_keywords'))
+          return
+        }
         this.pageInfos.pushPathByName('search', new SearchResultParam(this.keyword))
       })
       .onChange((value: string) => {
@@ -50,7 +54,7 @@ export struct SearchPage {
         Column() {
           Row() {
             SymbolGlyph($r('sys.symbol.hotspot')).fontColor([Color.Red])
-            Text('热门搜索').fontSize(19).margin({ left: 8 })
+            Text($r('app.string.search_hotkey')).fontSize(19).margin({ left: 8 })
           }
           .padding({ top: 12, bottom: 12 })
 

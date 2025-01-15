@@ -68,7 +68,7 @@ export struct NavigationPage {
   build() {
     Column() {
       Column() {
-        NavigationBarView({ title: '导航', showBack: false, navHeight: 44 })
+        NavigationBarView({ title: $r('app.string.tab_navigation'), showBack: false, navHeight: 44 })
         if(this.isLoading){
           ActivityLoading()
         }else {

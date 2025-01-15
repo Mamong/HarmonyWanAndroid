@@ -1,5 +1,5 @@
 import { LengthMetrics } from "@kit.ArkUI";
-import { CommonConstants as Const, ThemeColor } from '../constants/CommonConstants';
+import { CommonConstants as Const, NavigationTitle, ThemeColor } from '../constants/CommonConstants';
 
 @Component
 export struct SettingsPage {
@@ -16,7 +16,7 @@ export struct SettingsPage {
             Row() {
               Row() {
                 SymbolGlyph($r('sys.symbol.paintpalette_fill')).fontColor([this.themeColor])
-                Text('主题').margin({ left: 8 })
+                Text($r('app.string.menu_theme')).margin({ left: 8 })
               }
 
               Row() {
@@ -67,7 +67,7 @@ export struct SettingsPage {
           Row() {
             Row() {
               SymbolGlyph($r('sys.symbol.worldclock')).fontColor([this.themeColor])
-              Text('多语言').margin({ left: 8 })
+              Text($r('app.string.language')).margin({ left: 8 })
             }
 
             Row() {
@@ -91,6 +91,6 @@ export struct SettingsPage {
       .divider({ strokeWidth: 1, color: '#ffe9f0f0' })
     }
     .backgroundColor('#F3F4F5')
-    .title('设置')
+    .title(NavigationTitle($r('app.string.menu_settings')))
   }
 }

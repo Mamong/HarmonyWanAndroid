@@ -22,20 +22,20 @@ export struct CoinDetailListHeader{
     Grid() {
       GridItem() {
         Column({space:4}) {
-          Text('排名').infoTitle()
+          Text($r('app.string.points_rank')).infoTitle()
           Text("" + this.coinInfo.rank).infoContent()
         }
       }
       GridItem() {
         Column({space:4}) {
-          Text('等级').infoTitle()
+          Text($r('app.string.points_level')).infoTitle()
           Text("" + this.coinInfo.level).infoContent()
         }
       }
 
       GridItem() {
         Column({space:4}) {
-          Text('积分').infoTitle()
+          Text($r('app.string.points_point')).infoTitle()
           Text("" + this.coinInfo.coinCount).infoContent()
         }
       }

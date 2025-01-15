@@ -9,7 +9,7 @@ import { CommonConstants as Const } from '../constants/CommonConstants';
 
 interface Menu {
   icon: Resource
-  title: string
+  title: ResourceStr
   path: string
   action: boolean
 }
@@ -23,43 +23,43 @@ export struct SlideBar {
   @State private menus: Menu[] = [
     {
       icon: $r("sys.symbol.arrow_up_circle"),
-      title: "我的积分",
+      title: $r('app.string.menu_points'),
       path: "coinDetails",
       action: false
     },
     {
       icon: $r("sys.symbol.heart_fill"),
-      title: "我的收藏",
+      title: $r('app.string.menu_collection'),
       path: "collection",
       action: false
     },
     {
       icon: $r("sys.symbol.worldclock"),
-      title: "常用网站",
+      title: $r('app.string.menu_websites'),
       path: "website",
       action: false
     },
     {
       icon: $r("sys.symbol.person_fill"),
-      title: "关于作者",
+      title: $r('app.string.menu_about'),
       path: "about",
       action: false
     },
     {
       icon: $r("sys.symbol.share"),
-      title: "分享",
+      title: $r('app.string.menu_share'),
       path: "share",
       action: true
     },
     {
       icon: $r("sys.symbol.gearshape"),
-      title: "设置",
+      title: $r('app.string.menu_settings'),
       path: "settings",
       action: false
     },
     {
       icon: $r("sys.symbol.power"),
-      title: "退出登录",
+      title: $r('app.string.menu_logout'),
       path: "logout",
       action: true
     },
@@ -117,16 +117,16 @@ export struct SlideBar {
       this.share()
     } else if (action == 'logout') {
       this.getUIContext().showAlertDialog({
-        title: "提示",
-        message: "是否确定退出？",
+        title: $r('app.string.tips'),
+        message: $r('app.string.logout_confirm'),
         alignment: DialogAlignment.Center,
         buttons: [
           {
-            value: '取消', style: DialogButtonStyle.DEFAULT, action: () => {
+            value: $r('app.string.cancel'), style: DialogButtonStyle.DEFAULT, action: () => {
           }
           },
           {
-            value: '退出', style: DialogButtonStyle.HIGHLIGHT, action: () => {
+            value: $r('app.string.confirm'), style: DialogButtonStyle.HIGHLIGHT, action: () => {
 
           }
           }
@@ -150,7 +150,7 @@ export struct SlideBar {
                     .fontColor(Color.White)
                 } else {
                   SymbolGlyph($r('sys.symbol.person_crop_circle_fill')).fontSize(60)
-                  Text("登录")
+                  Text($r('app.string.login'))
                     .fontColor(Color.White)
                     .onClick(() => {
                       this.pageInfos.pushPathByName('login', null)
