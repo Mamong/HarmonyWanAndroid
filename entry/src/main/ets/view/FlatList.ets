@@ -1,39 +1,36 @@
 import { EmptyBuilder } from "../constants/CommonConstants"
 
 @Component
-export struct FlatList{
+export struct FlatList {
   @Link isRefreshing: boolean
-  @Require @Prop data:object[]
-
-  onRefresh?:()=>void
-  onEndReached?:()=>void
-  onDidScroll?:()=>void
-
-  scroller?:Scroller
-
+  @Require @Prop data: object[]
+  onRefresh?: () => void
+  onEndReached?: () => void
+  onDidScroll?: () => void
+  scroller?: Scroller
   @BuilderParam refreshControl?: () => void;
   @BuilderParam listEmpty?: () => void;
   @BuilderParam listHeader?: () => void;
   @BuilderParam listFooter?: () => void;
-  @Require @BuilderParam listItem: (value:object) => void = EmptyBuilder;
+  @Require @BuilderParam listItem: (value: object, index: number) => void = EmptyBuilder;
 
   build() {
-    if(this.data.length == 0 && !this.isRefreshing){
-      if(this.listEmpty){
+    if (this.data.length == 0 && !this.isRefreshing) {
+      if (this.listEmpty) {
         this.listEmpty()
       }
     } else {
       Refresh({ refreshing: $$this.isRefreshing, builder: this.refreshControl && this.refreshControl() }) {
-        List({ scroller: this.scroller}) {
+        List({ scroller: this.scroller }) {
           if (this.listHeader) {
             ListItem() {
               this.listHeader()
             }
           }
 
-          ForEach(this.data, (item: object) => {
+          ForEach(this.data, (item: object, index: number) => {
             ListItem() {
-              this.listItem(item)
+              this.listItem(item, index)
             }
           })
 
@@ -48,7 +45,7 @@ export struct FlatList{
         .onReachEnd(() => {
           this.onEndReached && this.onEndReached()
         })
-        .onDidScroll(()=>{
+        .onDidScroll(() => {
           this.onDidScroll && this.onDidScroll()
         })
       }

@@ -27,9 +27,9 @@ export struct CommonFlatList {
   /** 列表头builder */
   @BuilderParam listHeader?: () => void;
   /** 骨架屏builder */
-  @BuilderParam listItemSkeleton?: () => void;
+  @BuilderParam listItemSkeleton?: (index: number) => void;
   /** 列表项builder，必须 */
-  @Require @BuilderParam listItem: (value: object) => void = EmptyBuilder;
+  @Require @BuilderParam listItem: (value: object, index: number) => void = EmptyBuilder;
 
   @Builder
   listFooter() {
@@ -54,10 +54,10 @@ export struct CommonFlatList {
       if (this.isLoading) {
         if (this.skeletonCount > 0 && this.listItemSkeleton) {
           List() {
-            ForEach(new Array(this.skeletonCount).fill(0), () => {
+            ForEach(new Array(this.skeletonCount).fill(0), (_:number, index: number) => {
               if (this.listItemSkeleton) {
                 ListItem() {
-                  this.listItemSkeleton()
+                  this.listItemSkeleton(index)
                 }
               }
             })

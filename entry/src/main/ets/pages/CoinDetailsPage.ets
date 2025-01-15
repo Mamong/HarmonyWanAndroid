@@ -10,24 +10,13 @@ import { NavigationBarView } from "@mamong/navigationbarview"
 import { CoinDetailListItem, CoinDetailSkeletonItem } from "../view/CoinDetailListItem";
 import { SymbolGlyphModifier } from "@kit.ArkUI";
 import { WebviewParam } from "./WebView";
-
-@Extend(Text)
-function infoTitle() {
-  .fontColor(Color.White).fontSize(18)
-}
-
-@Extend(Text)
-function infoContent() {
-  .fontColor(Color.White)
-  .fontSize(28)
-  .fontWeight(FontWeight.Bold)
-}
+import { CoinDetailListHeader, CoinDetailSkeletonHeader } from "../view/CoinDetailListHeader";
 
 @Component
 export struct CoinDetailsPage {
   @Consume('pageInfos') pageInfos: NavPathStack
   @StorageLink('themeColor') themeColor: number = 0xFF2196F3
-  @State private  coinInfo: CoinInfo | null = null
+  @State private coinInfo: CoinInfo | null = null
   @State private isLoading: boolean = false
   @State private isSuccess: boolean = false
   //初次下载
@@ -90,32 +79,7 @@ export struct CoinDetailsPage {
   @Builder
   header() {
     if (this.coinInfo) {
-      Grid() {
-        GridItem() {
-          Column() {
-            Text('排名').infoTitle()
-            Text("" + this.coinInfo.rank).infoContent()
-          }
-        }
-        GridItem() {
-          Column() {
-            Text('等级').infoTitle()
-            Text("" + this.coinInfo.level).infoContent()
-          }
-        }
-
-        GridItem() {
-          Column() {
-            Text('积分').infoTitle()
-            Text("" + this.coinInfo.coinCount).infoContent()
-          }
-        }
-      }
-      .rowsTemplate('1fr')
-      .columnsTemplate('1fr 1fr 1fr')
-      .backgroundColor(this.themeColor)
-      .width('100%')
-      .height(100)
+      CoinDetailListHeader({ coinInfo: this.coinInfo })
     }
   }
 
@@ -125,8 +89,12 @@ export struct CoinDetailsPage {
   }
 
   @Builder
-  listItemSkeleton(){
-    CoinDetailSkeletonItem()
+  listItemSkeleton(index: number) {
+    if (index == 0) {
+      CoinDetailSkeletonHeader()
+    } else {
+      CoinDetailSkeletonItem()
+    }
   }
 
   build() {
@@ -143,8 +111,8 @@ export struct CoinDetailsPage {
           listItem: (value: object) => {
             this.listItem(value as CoinDetail)
           },
-          listItemSkeleton:()=>{
-            this.listItemSkeleton()
+          listItemSkeleton: (index: number) => {
+            this.listItemSkeleton(index)
           },
           listHeader: () => {
             this.header()

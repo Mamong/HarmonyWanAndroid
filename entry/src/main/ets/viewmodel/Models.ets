@@ -156,13 +156,13 @@ export class CoinListResponse {
 }
 
 
-export interface CoinInfo {
-  coinCount: number,
-  rank: number,
-  level: number,
-  userId: number,
-  username: string,
-  nickname: string
+export class CoinInfo {
+  coinCount: number = 0
+  rank: number = 0
+  level: number = 0
+  userId: number = 0
+  username: string = ""
+  nickname: string = ""
 }
 
 export class  CoinDetail {

@@ -26,6 +26,8 @@ export struct SkeletonBox {
         .onAppear(() => {
           this.translateValue = '100%'
         })
-    }.width('100%').height('100%')
+    }
+    .clip(true)
+    .width('100%').height('100%')
   }
 }
