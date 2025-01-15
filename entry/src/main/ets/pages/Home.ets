@@ -17,6 +17,7 @@ import { LanguagePage } from './LanguagePage';
 import { SearchPage } from './SearchPage';
 import { SearchResultPage, SearchResultParam } from './SearchResultPage';
 import { CollectionArticlesPage } from './CollectionArticlesPage';
+import { AboutPage } from './AboutPage';
 
 @Component
 export struct Home {
@@ -78,6 +79,8 @@ export struct Home {
       SearchResultPage({ param: param as SearchResultParam })
     } else if(name == 'collection'){
       CollectionArticlesPage()
+    } else if(name == 'about'){
+      AboutPage()
     }
   }
 
