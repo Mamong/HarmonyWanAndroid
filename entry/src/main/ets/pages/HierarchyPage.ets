@@ -4,7 +4,7 @@ import { Tree } from "../viewmodel/Models";
 import { LengthMetrics } from "@kit.ArkUI";
 import { NavigationBarView } from "@mamong/navigationbarview"
 import { CommonConstants as Const } from '../constants/CommonConstants';
-import { HierarchyParam } from "./HierarchyArticles";
+import { HierarchyParam } from "./HierarchyArticlesPage";
 import { toastShort } from "../utils/ToastUtils";
 import { ActivityLoading } from "../view/LoadingView";
 

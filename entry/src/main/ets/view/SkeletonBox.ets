@@ -1,6 +1,12 @@
+/*
+ * 支持矩形和圆形，使用圆角和剪裁来实现圆形skeleton：
+ * 例如SkeletonBox().width(50).height(50).borderRadius(25).clip(true)
+ *
+ * */
+
 @Component
 export struct SkeletonBox {
-  @State private translateValue: string = "-100%"
+  @State private translateX: string = "-100%"
 
   build() {
     Stack() {
@@ -13,7 +19,7 @@ export struct SkeletonBox {
         .height('100%')
         .width('100%')
         .fill(Color.Transparent)
-        .translate({ x: this.translateValue })
+        .translate({ x: this.translateX })
         .linearGradient({
           angle: 45,
           colors: [
@@ -24,7 +30,7 @@ export struct SkeletonBox {
         })
         .animation({ duration: 1500, iterations: -1 })
         .onAppear(() => {
-          this.translateValue = '100%'
+          this.translateX = '100%'
         })
     }
     .clip(true)

@@ -31,7 +31,7 @@ class Request {
     return Request.request(url, http.RequestMethod.GET, queryParameters, resourceType) as Promise<T[]>;
   }
 
-  static async post<T>(url: string, data: Record<string, string | number | boolean>,
+  static async post<T>(url: string, data?: Record<string, string | number | boolean> | null,
     resourceType?: ClassConstructor<T>): Promise<T> {
     return Request.request<T>(url, http.RequestMethod.POST, data, resourceType) as Promise<T>;
   }

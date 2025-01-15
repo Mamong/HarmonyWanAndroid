@@ -9,13 +9,14 @@ import { HierarchyPage } from './HierarchyPage';
 import { SlideBar } from './SlideBar';
 import { LoginPage } from './LoginPage';
 import { RegisterPage } from './RegisterPage';
-import { Webview, WebviewParam } from './WebView';
-import { HierarchyArticles, HierarchyParam } from './HierarchyArticles';
+import { Webview, WebviewParam } from './WebViewPage';
+import { HierarchyArticles, HierarchyParam } from './HierarchyArticlesPage';
 import { CoinDetailsPage } from './CoinDetailsPage';
 import { SettingsPage } from './SettingsPage';
 import { LanguagePage } from './LanguagePage';
 import { SearchPage } from './SearchPage';
 import { SearchResultPage, SearchResultParam } from './SearchResultPage';
+import { CollectionArticlesPage } from './CollectionArticlesPage';
 
 @Component
 export struct Home {
@@ -75,6 +76,8 @@ export struct Home {
       SearchPage()
     } else if (name == 'search') {
       SearchResultPage({ param: param as SearchResultParam })
+    } else if(name == 'collection'){
+      CollectionArticlesPage()
     }
   }
 

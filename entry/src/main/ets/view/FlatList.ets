@@ -8,6 +8,7 @@ export struct FlatList {
   onEndReached?: () => void
   onDidScroll?: () => void
   scroller?: Scroller
+  keyGenerator?: (item: object, index: number) => string
   @BuilderParam refreshControl?: () => void;
   @BuilderParam listEmpty?: () => void;
   @BuilderParam listHeader?: () => void;
@@ -32,7 +33,7 @@ export struct FlatList {
             ListItem() {
               this.listItem(item, index)
             }
-          })
+          }, this.keyGenerator)
 
           if (this.listFooter) {
             ListItem() {

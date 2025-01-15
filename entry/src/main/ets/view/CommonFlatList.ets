@@ -24,6 +24,7 @@ export struct CommonFlatList {
   @Require @Prop data: object[]
   onRefresh?: () => void
   onEndReached?: () => void
+  keyGenerator?: (item: object, index: number) => string
   /** 列表头builder */
   @BuilderParam listHeader?: () => void;
   /** 骨架屏builder */
@@ -83,6 +84,7 @@ export struct CommonFlatList {
             data: this.data,
             listHeader: this.listHeader,
             listItem: this.listItem,
+            keyGenerator: this.keyGenerator,
             // refreshControl: () => {
             //
             // },

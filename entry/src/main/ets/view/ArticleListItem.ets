@@ -1,12 +1,63 @@
 import { Article } from "../viewmodel/Models";
 import { CommonConstants as Const } from '../constants/CommonConstants';
-import { WebviewParam } from "../pages/WebView";
+import { WebviewParam } from "../pages/WebViewPage";
+import userVm from "../viewmodel/UserViewModel"
+import { ApiException } from "../utils/Request";
+import { toastShort } from "../utils/ToastUtils";
+import { ArticleSource } from "./ArticleList";
+import { ColorConst } from "../constants/ColorConst";
+import { emitter } from "@kit.BasicServicesKit";
 
 @Reusable
 @Component
 export struct ArticleListItem {
   @Consume('pageInfos') pageInfos: NavPathStack
-  item: Article = new Article();
+  @State item: Article = new Article()
+  source: ArticleSource = ArticleSource.Home
+
+  isFromCollection() {
+    return this.source == ArticleSource.Collection
+  }
+
+  isFromWx() {
+    return this.source == ArticleSource.WxArticle
+  }
+
+  collectArticle() {
+    userVm.collectArticle(this.item.id).then(() => {
+      this.item.collect = true
+    }).catch((error: ApiException) => {
+      toastShort(this.getUIContext(), error.message)
+    })
+  }
+
+  uncollectArticle() {
+    let request: Promise<void>
+    if (this.isFromCollection()) {
+      //需要移除本条收藏
+      request = userVm.uncollectMyArticle(this.item.id, this.item.originId)
+    } else {
+      request = userVm.uncollectArticle(this.item.id)
+    }
+    request.then(() => {
+      this.item.collect = false
+      if(this.isFromCollection()){
+        let eventData: emitter.EventData = {
+          data: {
+            "id": this.item.id,
+          }
+        };
+
+        let innerEvent: emitter.InnerEvent = {
+          eventId: 1000,
+          priority: emitter.EventPriority.HIGH
+        };
+        emitter.emit(innerEvent, eventData);
+      }
+    }).catch((error: ApiException) => {
+      toastShort(this.getUIContext(), error.message)
+    })
+  }
 
   aboutToReuse(params: Record<string, ESObject>) {
     this.item = params.item as Article
@@ -40,8 +91,16 @@ export struct ArticleListItem {
   ArticleBottom() {
     Flex({ alignItems: ItemAlign.Center }) {
       SymbolGlyph($r('sys.symbol.heart_fill'))
+        .fontColor([this.item.collect || this.isFromCollection() ? 0xFFFA8072 : 0xFFE0E0E0])
         .width(25)
         .height(25)
+        .onClick(() => {
+          if (this.item.collect) {
+            this.uncollectArticle()
+          } else {
+            this.collectArticle()
+          }
+        })
       SymbolGlyph($r('sys.symbol.clock_fill'))
         .width(25)
         .height(25)
@@ -87,16 +146,16 @@ export struct ArticleListItem {
           .width(60)
           .height(60)
           .borderRadius(30)
-          .backgroundColor(Const.chapterBgColor[this.item.id%10])
+          .backgroundColor(this.isFromWx() ? ColorConst.WX_GREEN : Const.chapterBgColor[this.item.id%10])
       }
     }
     .onClick(() => {
-      this.pageInfos.pushPathByName('webview', new WebviewParam(this.item.title, this.item.link ))
+      this.pageInfos.pushPathByName('webview', new WebviewParam(this.item.title, this.item.link))
     })
     .backgroundColor('#FFFFFF')
     .padding(12)
     .borderRadius(10)
     // ListItem card模式默认有缩进
-    .margin({ left: 12, right: 12,bottom: 12 })
+    .margin({ left: 12, right: 12, bottom: 12 })
   }
 }

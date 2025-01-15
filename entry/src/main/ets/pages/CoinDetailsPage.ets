@@ -9,7 +9,7 @@ import { CommonFlatList } from "../view/CommonFlatList";
 import { NavigationBarView } from "@mamong/navigationbarview"
 import { CoinDetailListItem, CoinDetailSkeletonItem } from "../view/CoinDetailListItem";
 import { SymbolGlyphModifier } from "@kit.ArkUI";
-import { WebviewParam } from "./WebView";
+import { WebviewParam } from "./WebViewPage";
 import { CoinDetailListHeader, CoinDetailSkeletonHeader } from "../view/CoinDetailListHeader";
 
 @Component

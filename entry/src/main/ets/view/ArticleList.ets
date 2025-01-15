@@ -1,9 +1,11 @@
 import ArticleVm from "../viewmodel/ArticleViewModel"
+import UserVm from "../viewmodel/UserViewModel"
 import { ListResponse, Article } from "../viewmodel/Models";
 import { ApiException } from "../utils/Request";
 import { toastShort } from "../utils/ToastUtils";
 import { ArticleListItem } from "./ArticleListItem";
 import { CommonFlatList } from "./CommonFlatList";
+import { emitter } from "@kit.BasicServicesKit";
 
 @Component
 export struct ArticleList {
@@ -29,7 +31,7 @@ export struct ArticleList {
     switch (this.source) {
       case ArticleSource.Home:
       case ArticleSource.Collection:
-        request = ArticleVm.getArticleList(page);
+        request = UserVm.getCollectArticles(page);
         break;
       case ArticleSource.Search:
         request = ArticleVm.getSearchArticleList(this.ext as string, page);
@@ -82,11 +84,36 @@ export struct ArticleList {
     this.isRefreshing = true
     this.loadData()
     console.info(`=====aboutToAppear:${this.ext}=====`)
+
+    //该功能目前在预览中无效
+    if (this.source == ArticleSource.Collection) {
+      let innerEvent: emitter.InnerEvent = {
+        eventId: 1000
+      };
+
+      // 收到eventId为1000的事件后执行回调函数
+      emitter.on(innerEvent, (eventData: emitter.EventData) => {
+        let id = eventData?.data?.id as number
+        if (id) {
+          //本地移除会影响分页，强制刷新会导致丢失浏览进度
+          //this.data = this.data.filter(item => item.id != id)
+          //最好的做法是每次请求分页，添加数据的时候进行去重
+          this.loadData()
+        }
+        console.info('callback');
+      });
+    }
+  }
+
+  aboutToDisappear(): void {
+    if (this.source == ArticleSource.Collection) {
+      emitter.off(1000)
+    }
   }
 
   @Builder
   listItem(value: Article) {
-    ArticleListItem({ item: value })
+    ArticleListItem({ item: value, source: this.source })
   }
 
   build() {
@@ -98,6 +125,7 @@ export struct ArticleList {
         hasMoreData: this.hasMoreData,
         error: this.error,
         data: this.data,
+        keyGenerator: (value: object) => "" + (value as Article).id,
         listItem: (value: object) => {
           this.listItem(value as Article)
         },

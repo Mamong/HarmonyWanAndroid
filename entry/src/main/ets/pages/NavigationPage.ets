@@ -5,7 +5,7 @@ import { Article, Navi } from "../viewmodel/Models"
 import { LengthMetrics } from "@kit.ArkUI"
 import { NavigationBarView } from "@mamong/navigationbarview"
 import { CommonConstants as Const } from '../constants/CommonConstants';
-import { WebviewParam } from "./WebView"
+import { WebviewParam } from "./WebViewPage"
 import { ActivityLoading } from "../view/LoadingView"
 
 @Component
