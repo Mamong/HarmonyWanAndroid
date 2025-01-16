@@ -3,6 +3,9 @@
 A new Wan Android Harmony client.
 
 ## Getting Started
+本项目采用了原始的架构，所有接口在viewmodel目录下，所有页面在pages下，用到的一些widget或者组件在View下。
+另外试验性使用了clean architecture，这部分依赖DI容器[inversify](https://ohpm.openharmony.cn/#/cn/detail/inversify)。
+相关试验模块为core和src下的auth。clean architecture代码量会比较大，但是数据相关部分(data目录下)看起来比较流畅，没有tricky代码。
 
 
 ## 交互设计原则

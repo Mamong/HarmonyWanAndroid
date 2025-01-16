@@ -18,7 +18,7 @@ export struct OnBoardingPage{
         .itemHeight(15)
         .selectedItemWidth(30)
         .selectedItemHeight(15)
-        .color(Color.White)
+        .color(Color.Orange)
         .selectedColor(Color.Orange)
     )
   }
