@@ -71,7 +71,6 @@ export struct SlideBar {
   // 手指移动x坐标
   private moveX: number = 0
 
-
   private async share() {
     let resMgr = getContext().resourceManager
     let resId = $r('app.media.logo').id
@@ -127,7 +126,8 @@ export struct SlideBar {
           },
           {
             value: $r('app.string.confirm'), style: DialogButtonStyle.HIGHLIGHT, action: () => {
-
+            AppStorage.setOrCreate("cookies","")
+            AppStorage.setOrCreate("username","")
           }
           }
         ]

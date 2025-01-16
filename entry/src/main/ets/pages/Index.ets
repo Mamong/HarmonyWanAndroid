@@ -27,8 +27,8 @@ import { SplashPage } from './SplashPage';
 @Component
 struct Index {
   @StorageLink('currentBreakpoint') currentBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
-  @StorageLink('firstLaunch') firstLaunch: boolean = false;
-  @StorageLink('showSplash') showSplash: boolean = true
+  @StorageLink('firstLaunch') firstLaunch: boolean = true;
+  @StorageLink('showSplash') showSplash: boolean = false
 
   build() {
     GridRow({
