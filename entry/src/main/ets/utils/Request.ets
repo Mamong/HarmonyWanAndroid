@@ -59,7 +59,7 @@ class Request {
     if (cookies) {
       hilog.info(0, "network", `request cookies: ${cookies}`)
     }
-    cookies = "loginUserName=testdog3\r; token_pass=6f46849b7027f489ae8bef583d6e1725\r; loginUserName_wanandroid_com=testdog3\r; token_pass_wanandroid_com=6f46849b7027f489ae8bef583d6e1725"
+    //cookies = "loginUserName=testdog3\r; token_pass=6f46849b7027f489ae8bef583d6e1725\r; loginUserName_wanandroid_com=testdog3\r; token_pass_wanandroid_com=6f46849b7027f489ae8bef583d6e1725"
     let value: http.HttpResponse
     try {
       value = await Request.httpRequest.request(apiUrl, {

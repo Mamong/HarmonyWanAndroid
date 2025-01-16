@@ -73,7 +73,7 @@ export struct AboutPage {
         }
         .margin({ top: 75 })
 
-        Text($r('app.string.about_bottom')).align(Alignment.Bottom)
+        Text($r('app.string.about_bottom'))
           .margin({ bottom: 25 })
       }
       .justifyContent(FlexAlign.SpaceBetween)

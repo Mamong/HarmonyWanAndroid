@@ -20,11 +20,15 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { BreakpointConstants } from '../constants/BreakpointConstants';
 import { CommonConstants } from '../constants/CommonConstants';
 import { Home } from './Home';
+import { OnBoardingPage } from './OnBoardingPage';
+import { SplashPage } from './SplashPage';
 
 @Entry
 @Component
 struct Index {
   @StorageLink('currentBreakpoint') currentBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('firstLaunch') firstLaunch: boolean = false;
+  @StorageLink('showSplash') showSplash: boolean = true
 
   build() {
     GridRow({
@@ -41,7 +45,16 @@ struct Index {
           lg: BreakpointConstants.GRID_COLUMN_SPANS[4]
         }
       }) {
-        Home()
+        Stack() {
+          Home()
+          if(this.firstLaunch) {
+            OnBoardingPage()
+          }else{
+            if(this.showSplash){
+              SplashPage()
+            }
+          }
+        }
       }
       .height(CommonConstants.FULL_PERCENT)
       .width(CommonConstants.FULL_PERCENT)

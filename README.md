@@ -44,10 +44,11 @@ A new Wan Android Harmony client.
 ## Screenshots
 
 ![](screenshots/1.gif)
+![](screenshots/2.gif)
 
 ## 已知问题
 * 同一篇文章在不同位置的收藏状态不同步
 
 
 ## 声明
-本项目使用的 API 均来自于 [www.wanandroid.com](www.wanandroid.com) 网站，纯属学习交流使用，不得用于商业用途。
+本项目使用的 API 均来自于 [www.wanandroid.com](http://www.wanandroid.com) 网站，纯属学习交流使用，不得用于商业用途。
